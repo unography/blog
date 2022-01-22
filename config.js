@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  url: 'https://hopeful-spence-9f03cf.netlify.app/',
+  url: 'https://dhruvkaran.com',
   pathPrefix: '/',
   title: 'Dhruv Karan',
   subtitle: 'Data Scientist, Photographer, weird AI artist',
