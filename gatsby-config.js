@@ -220,6 +220,14 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+            `gatsby-remark-line-breaks`
+        ]
+      }
+    },
     'gatsby-plugin-catch-links',
     'gatsby-plugin-react-helmet',
     {

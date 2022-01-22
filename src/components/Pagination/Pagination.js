@@ -1,7 +1,8 @@
 // @flow strict
 import React from 'react';
 import classNames from 'classnames/bind';
-import { Link } from 'gatsby';
+// import { Link } from 'gatsby';
+import Link from "../GatsbyLink"
 import { PAGINATION } from '../../constants';
 import styles from './Pagination.module.scss';
 

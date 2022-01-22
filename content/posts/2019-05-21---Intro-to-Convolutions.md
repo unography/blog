@@ -4,7 +4,7 @@ date: "2019-05-21T23:46:37.121Z"
 template: "post"
 draft: false
 slug: "intro-to-convolutions"
-category: "ML"
+category: "Machine Learning"
 tags:
   - "machine learning"
   - "deep learning"

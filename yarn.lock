@@ -9482,6 +9482,13 @@ gatsby-remark-katex@^3.10.0:
     remark-math "^1.0.6"
     unist-util-visit "^1.4.1"
 
+gatsby-remark-line-breaks@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-line-breaks/-/gatsby-remark-line-breaks-1.0.0.tgz#60f838433acc24ddf425f4d135e12cea634bc7a3"
+  integrity sha512-chLmEttxDDLGy18nhOlfPFDmzt8EhLEnj1RSxvdtskpIS8F0M3vIhRN9J1MFB5s+19OeLzscubrjT+kK4gKrgw==
+  dependencies:
+    remark-breaks "^1.0.5"
+
 gatsby-remark-prismjs@^3.13.0:
   version "3.13.0"
   resolved "https://registry.yarnpkg.com/gatsby-remark-prismjs/-/gatsby-remark-prismjs-3.13.0.tgz#010c4f9371154536018d4488ee474066a438a0cb"
@@ -17290,6 +17297,11 @@ relateurl@0.2.x:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
+
+remark-breaks@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/remark-breaks/-/remark-breaks-1.0.5.tgz#e9785f8b174f45c05af542fbeb18354b766e1139"
+  integrity sha512-lr8+TlJI273NjEqL27eUthPYPTCgXEj4NaLbnazS3bQaQL2FySlsbtgo52gE36fE1gWeQgkn1VdmWsoT+uA7FA==
 
 remark-gfm@1.0.0:
   version "1.0.0"

@@ -1,6 +1,7 @@
 // @flow strict
 import React from 'react';
-import { Link } from 'gatsby';
+// import { Link } from 'gatsby';
+import Link from "../components/GatsbyLink"
 import kebabCase from 'lodash/kebabCase';
 import Layout from '../components/Layout';
 import Sidebar from '../components/Sidebar';
