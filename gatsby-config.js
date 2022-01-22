@@ -134,6 +134,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-netlify-cms',
       options: {
+        url: `https://hopeful-spence-9f03cf.netlify.app/`,
         modulePath: `${__dirname}/src/cms/index.js`
       }
     },
