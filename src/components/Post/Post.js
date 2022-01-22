@@ -1,7 +1,7 @@
 // @flow strict
 import React from 'react';
 // import { Link } from 'gatsby';
-import Link from "../GatsbyLink"
+import Link from '../GatsbyLink'
 import Author from './Author';
 import Comments from './Comments';
 import Content from './Content';

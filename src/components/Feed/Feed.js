@@ -1,7 +1,7 @@
 // @flow strict
 import React from 'react';
 // import { Link } from 'gatsby';
-import Link from "../GatsbyLink"
+import Link from '../GatsbyLink'
 import type { Edges } from '../../types';
 import styles from './Feed.module.scss';
 
