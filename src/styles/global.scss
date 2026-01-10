@@ -1,0 +1,122 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+// Reset
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: $font-family;
+  color: $color-base;
+  line-height: $line-height-base;
+  font-size: $font-size-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: $font-size-base * 2.5;
+  @include line-height(2);
+  @include margin-top(4);
+  @include margin-bottom(1);
+}
+
+h2 {
+  font-size: $font-size-base * 1.6875;
+  @include line-height(1.5);
+  @include margin-top(2);
+  @include margin-bottom(0.5);
+}
+
+h3 {
+  font-size: $font-size-base * 1.375;
+  @include margin-top(2);
+  @include margin-bottom(0.5);
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    color: $color-secondary;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}
+
+p {
+  @include margin-bottom(1);
+}
+
+ul, ol {
+  @include margin-bottom(1);
+
+  li {
+    padding: 0 5px;
+    margin-bottom: 10px;
+  }
+}
+
+ul {
+  list-style: square;
+}
+
+hr {
+  margin: 52px auto;
+  border: 0;
+  height: 26px;
+  width: 100px;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 1px,
+    transparent 11px,
+    $color-base 11px,
+    $color-base 15px,
+    transparent 15px,
+    transparent 26px
+  );
+}
+
+blockquote {
+  padding: 0;
+  font-style: italic;
+  text-align: center;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 16px;
+  border-radius: 4px;
+  background: #1e1e1e;
+  color: #d4d4d4;
+}
+
+code {
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 0.9em;
+  background: $color-gray-bg;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}

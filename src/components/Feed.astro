@@ -1,0 +1,110 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { slugify } from '@/utils/slugify';
+import { formatDateShort } from '@/utils/date';
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="feed">
+  {posts.map((post) => (
+    <article class="feed__item">
+      <div class="feed__meta">
+        <time class="feed__time" datetime={post.data.date.toISOString()}>
+          {formatDateShort(post.data.date)}
+        </time>
+        <span class="feed__divider" />
+        <a href={`/category/${slugify(post.data.category)}/`} class="feed__category">
+          {post.data.category}
+        </a>
+      </div>
+
+      <h2 class="feed__title">
+        <a href={`/posts/${post.slug}/`} class="feed__title-link">
+          {post.data.title}
+        </a>
+      </h2>
+
+      <p class="feed__description">{post.data.description}</p>
+
+      <a href={`/posts/${post.slug}/`} class="feed__readmore">Read</a>
+    </article>
+  ))}
+</div>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+  @use '@/styles/mixins' as *;
+
+  .feed {
+    &__item {
+      @include margin-bottom(1.25);
+
+      &:last-child {
+        @include margin-bottom(0.5);
+      }
+    }
+
+    &__meta {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      margin-bottom: 8px;
+    }
+
+    &__time {
+      font-size: $font-size-small;
+      color: $color-base;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    &__divider {
+      width: 1px;
+      height: $spacing-sm;
+      background: $color-gray-border;
+    }
+
+    &__category {
+      font-size: $font-size-small;
+      color: $color-secondary;
+      font-weight: 600;
+      text-transform: uppercase;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    &__title {
+      font-size: $font-size-base * 1.6875;
+      @include line-height(1.5);
+      margin: 0 0 $spacing-sm;
+    }
+
+    &__title-link {
+      color: $color-base;
+
+      &:hover {
+        border-bottom: 1px solid $color-base;
+      }
+    }
+
+    &__description {
+      font-size: $font-size-base;
+      @include margin-bottom(0.75);
+    }
+
+    &__readmore {
+      color: $color-primary;
+
+      &:hover {
+        border-bottom: 1px solid $color-primary;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,34 @@
+@use "sass:math";
+@use './variables' as *;
+
+// Responsive breakpoints
+@mixin breakpoint-sm {
+  @media screen and (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin breakpoint-md {
+  @media screen and (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin breakpoint-lg {
+  @media screen and (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+// Typography helpers - $leading is unitless, output in px
+@mixin margin-top($lines) {
+  margin-top: #{$leading * $lines}px;
+}
+
+@mixin margin-bottom($lines) {
+  margin-bottom: #{$leading * $lines}px;
+}
+
+@mixin line-height($lines) {
+  line-height: #{$leading * $lines}px;
+}

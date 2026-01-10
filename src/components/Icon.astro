@@ -1,0 +1,29 @@
+---
+import { ICONS } from '@/constants/icons';
+
+interface Props {
+  name: string;
+  size?: number;
+}
+
+const { name, size = 18 } = Astro.props;
+const icon = ICONS[name.toUpperCase()];
+---
+
+{icon && (
+  <svg
+    class="icon"
+    viewBox={icon.viewBox}
+    width={size}
+    height={size}
+    aria-hidden="true"
+  >
+    <path d={icon.path} />
+  </svg>
+)}
+
+<style>
+  .icon {
+    fill: currentColor;
+  }
+</style>

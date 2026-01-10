@@ -1,0 +1,58 @@
+---
+import { siteConfig } from '@/config';
+import Author from './sidebar/Author.astro';
+import Menu from './sidebar/Menu.astro';
+import Contacts from './sidebar/Contacts.astro';
+
+interface Props {
+  useH1?: boolean;
+}
+
+const { useH1 = false } = Astro.props;
+const { author, menu } = siteConfig;
+---
+
+<aside class="sidebar">
+  <div class="sidebar__inner">
+    <Author author={author} useH1={useH1} />
+    <Menu menu={menu} />
+    <Contacts contacts={author.contacts} />
+  </div>
+</aside>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+  @use '@/styles/mixins' as *;
+
+  .sidebar {
+    width: 100%;
+
+    &__inner {
+      position: relative;
+      padding: 25px 20px 0;
+
+      @include breakpoint-sm {
+        padding: 30px 20px 0;
+
+        &::after {
+          content: '';
+          position: absolute;
+          width: 1px;
+          height: 540px;
+          top: 30px;
+          right: -20px;
+          background: linear-gradient(
+            to bottom,
+            $color-gray-border 0%,
+            $color-gray-border 48%,
+            $color-white 100%
+          );
+        }
+      }
+
+      @include breakpoint-md {
+        padding: 40px;
+      }
+    }
+  }
+</style>

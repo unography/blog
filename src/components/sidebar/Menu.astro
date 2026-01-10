@@ -1,0 +1,49 @@
+---
+interface Props {
+  menu: Array<{ label: string; path: string }>;
+}
+
+const { menu } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="menu">
+  <ul class="menu__list">
+    {menu.map((item) => (
+      <li class="menu__item">
+        <a
+          href={item.path}
+          class:list={['menu__link', { 'menu__link--active': currentPath === item.path || (item.path === '/' && currentPath.startsWith('/page/')) }]}
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+
+  .menu {
+    &__list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    &__item {
+      margin-bottom: 10px;
+    }
+
+    &__link {
+      color: $color-base;
+      font-weight: 500;
+
+      &:hover, &--active {
+        color: $color-primary;
+        border-bottom: 1px solid $color-primary;
+      }
+    }
+  }
+</style>

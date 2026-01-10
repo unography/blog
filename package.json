@@ -1,0 +1,23 @@
+{
+  "name": "dhruvkaran-blog",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Dhruv Karan's personal blog",
+  "author": "Dhruv Karan <k4r4n.dhruv@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.0",
+    "astro": "^4.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.3.0",
+    "sass": "^1.69.0",
+    "typescript": "^5.3.0"
+  }
+}

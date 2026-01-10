@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '@/layouts/MainLayout.astro';
+import Page from '@/components/Page.astro';
+import Feed from '@/components/Feed.astro';
+import Pagination from '@/components/Pagination.astro';
+import { siteConfig } from '@/config';
+import { paginatePosts } from '@/utils/pagination';
+import { slugify } from '@/utils/slugify';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+  // Get unique categories
+  const categories = new Set<string>();
+  posts.forEach((post) => categories.add(post.data.category));
+
+  return Array.from(categories).map((category) => ({
+    params: { category: slugify(category) },
+    props: { categoryName: category }
+  }));
+}
+
+const { category } = Astro.params;
+const { categoryName } = Astro.props;
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const categoryPosts = allPosts
+  .filter((post) => slugify(post.data.category) === category)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const { posts, prevUrl, nextUrl } = paginatePosts(
+  categoryPosts,
+  1,
+  siteConfig.postsPerPage,
+  `/category/${category}`
+);
+
+const title = `${categoryName} - ${siteConfig.title}`;
+---
+
+<MainLayout title={title}>
+  <Page title={categoryName}>
+    <Feed posts={posts} />
+    <Pagination prevUrl={prevUrl} nextUrl={nextUrl} />
+  </Page>
+</MainLayout>

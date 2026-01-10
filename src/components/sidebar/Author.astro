@@ -1,0 +1,67 @@
+---
+interface Props {
+  author: {
+    name: string;
+    bio: string;
+    photo: string;
+  };
+  useH1?: boolean;
+}
+
+const { author, useH1 = false } = Astro.props;
+---
+
+<div class="author">
+  <a href="/">
+    <img
+      src={author.photo}
+      class="author__photo"
+      width="75"
+      height="75"
+      alt={author.name}
+    />
+  </a>
+
+  {useH1 ? (
+    <h1 class="author__title">
+      <a class="author__title-link" href="/">{author.name}</a>
+    </h1>
+  ) : (
+    <h2 class="author__title">
+      <a class="author__title-link" href="/">{author.name}</a>
+    </h2>
+  )}
+
+  <p class="author__subtitle">{author.bio}</p>
+</div>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+
+  .author {
+    &__photo {
+      border-radius: 50%;
+      margin-bottom: $spacing-sm;
+    }
+
+    &__title {
+      font-size: $font-size-base * 1.125;
+      font-weight: 600;
+      margin: 0 0 $spacing-sm;
+    }
+
+    &__title-link {
+      color: $color-base;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    &__subtitle {
+      color: $color-gray;
+      font-size: $font-size-small;
+      margin: 0;
+    }
+  }
+</style>

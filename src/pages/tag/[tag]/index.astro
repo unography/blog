@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '@/layouts/MainLayout.astro';
+import Page from '@/components/Page.astro';
+import Feed from '@/components/Feed.astro';
+import Pagination from '@/components/Pagination.astro';
+import { siteConfig } from '@/config';
+import { paginatePosts } from '@/utils/pagination';
+import { slugify } from '@/utils/slugify';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+  // Get unique tags
+  const tags = new Set<string>();
+  posts.forEach((post) => {
+    post.data.tags.forEach((tag) => tags.add(tag));
+  });
+
+  return Array.from(tags).map((tag) => ({
+    params: { tag: slugify(tag) },
+    props: { tagName: tag }
+  }));
+}
+
+const { tag } = Astro.params;
+const { tagName } = Astro.props;
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const tagPosts = allPosts
+  .filter((post) => post.data.tags.some((t) => slugify(t) === tag))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const { posts, prevUrl, nextUrl } = paginatePosts(
+  tagPosts,
+  1,
+  siteConfig.postsPerPage,
+  `/tag/${tag}`
+);
+
+const title = `Posts tagged "${tagName}" - ${siteConfig.title}`;
+---
+
+<MainLayout title={title}>
+  <Page title={tagName}>
+    <Feed posts={posts} />
+    <Pagination prevUrl={prevUrl} nextUrl={nextUrl} />
+  </Page>
+</MainLayout>

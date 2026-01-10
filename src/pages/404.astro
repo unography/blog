@@ -1,0 +1,12 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import Page from '@/components/Page.astro';
+import { siteConfig } from '@/config';
+---
+
+<MainLayout title={`Not Found - ${siteConfig.title}`}>
+  <Page title="404: Page Not Found">
+    <p>The page you're looking for doesn't exist.</p>
+    <a href="/">Go back home</a>
+  </Page>
+</MainLayout>

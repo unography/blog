@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '@/layouts/MainLayout.astro';
+import Page from '@/components/Page.astro';
+import { siteConfig } from '@/config';
+import { slugify } from '@/utils/slugify';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+// Extract and count tags
+const tagCounts = new Map<string, number>();
+posts.forEach((post) => {
+  post.data.tags.forEach((tag) => {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  });
+});
+
+const tags = Array.from(tagCounts.entries()).sort((a, b) =>
+  a[0].localeCompare(b[0])
+);
+
+const title = `Tags - ${siteConfig.title}`;
+---
+
+<MainLayout title={title}>
+  <Page title="Tags">
+    <ul class="tags-list">
+      {tags.map(([tag, count]) => (
+        <li>
+          <a href={`/tag/${slugify(tag)}/`}>
+            {tag} ({count})
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Page>
+</MainLayout>
+
+<style lang="scss">
+  .tags-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+    }
+  }
+</style>

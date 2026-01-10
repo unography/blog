@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '@/layouts/MainLayout.astro';
+import Page from '@/components/Page.astro';
+import { siteConfig } from '@/config';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page }
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await page.render();
+const title = `${page.data.title} - ${siteConfig.title}`;
+---
+
+<MainLayout title={title} socialImage={page.data.socialImage}>
+  <Page title={page.data.title}>
+    <Content />
+  </Page>
+</MainLayout>

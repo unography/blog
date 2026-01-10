@@ -1,0 +1,23 @@
+---
+import { formatDateLong } from '@/utils/date';
+
+interface Props {
+  date: Date;
+}
+
+const { date } = Astro.props;
+---
+
+<p class="meta">
+  Published <time datetime={date.toISOString()}>{formatDateLong(date)}</time>
+</p>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+
+  .meta {
+    font-size: $font-size-small;
+    color: $color-gray;
+    font-style: italic;
+  }
+</style>

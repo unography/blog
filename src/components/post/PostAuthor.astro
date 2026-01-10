@@ -1,0 +1,59 @@
+---
+import { siteConfig } from '@/config';
+
+const { author } = siteConfig;
+---
+
+<div class="author">
+  <a href="/">
+    <img
+      src={author.photo}
+      class="author__photo"
+      width="60"
+      height="60"
+      alt={author.name}
+    />
+  </a>
+  <div class="author__info">
+    <a href="/" class="author__name">{author.name}</a>
+    <p class="author__bio">{author.bio}</p>
+  </div>
+</div>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid $color-gray-border;
+
+    &__photo {
+      border-radius: 50%;
+    }
+
+    &__info {
+      flex: 1;
+    }
+
+    &__name {
+      display: block;
+      font-weight: 600;
+      color: $color-base;
+      margin-bottom: 5px;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    &__bio {
+      font-size: $font-size-small;
+      color: $color-gray;
+      margin: 0;
+    }
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '@/layouts/MainLayout.astro';
+import Page from '@/components/Page.astro';
+import { siteConfig } from '@/config';
+import { slugify } from '@/utils/slugify';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+// Extract and count categories
+const categoryCounts = new Map<string, number>();
+posts.forEach((post) => {
+  const cat = post.data.category;
+  categoryCounts.set(cat, (categoryCounts.get(cat) || 0) + 1);
+});
+
+const categories = Array.from(categoryCounts.entries()).sort((a, b) =>
+  a[0].localeCompare(b[0])
+);
+
+const title = `Categories - ${siteConfig.title}`;
+---
+
+<MainLayout title={title}>
+  <Page title="Categories">
+    <ul class="categories-list">
+      {categories.map(([category, count]) => (
+        <li>
+          <a href={`/category/${slugify(category)}/`}>
+            {category} ({count})
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Page>
+</MainLayout>
+
+<style lang="scss">
+  .categories-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+    }
+  }
+</style>

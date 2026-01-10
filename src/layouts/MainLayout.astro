@@ -1,0 +1,47 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '@/components/Sidebar.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  socialImage?: string;
+  useH1?: boolean;
+}
+
+const { title, description, socialImage, useH1 = false } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} socialImage={socialImage}>
+  <div class="layout">
+    <Sidebar useH1={useH1} />
+    <main class="content">
+      <slot />
+    </main>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+  @use '@/styles/mixins' as *;
+
+  .layout {
+    max-width: $layout-max-width;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    @include breakpoint-sm {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 40px;
+    }
+
+    @include breakpoint-md {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  .content {
+    min-width: 0;
+  }
+</style>

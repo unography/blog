@@ -1,0 +1,60 @@
+---
+import { siteConfig } from '@/config';
+
+interface Props {
+  type: 'website' | 'article';
+  title: string;
+  description: string;
+  image: string;
+  canonical: string;
+  publishedTime?: Date;
+  tags?: string[];
+  isHomepage?: boolean;
+}
+
+const { type, title, description, image, canonical, publishedTime, tags = [], isHomepage = false } = Astro.props;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "image": image,
+  "datePublished": publishedTime?.toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": siteConfig.author.name,
+    "url": siteConfig.url
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": siteConfig.author.name,
+    "url": siteConfig.url
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonical
+  },
+  "keywords": tags.join(", ")
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": siteConfig.title,
+  "description": siteConfig.subtitle,
+  "url": siteConfig.url,
+  "author": {
+    "@type": "Person",
+    "name": siteConfig.author.name
+  }
+};
+---
+
+{type === 'article' && publishedTime && (
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+)}
+
+{type === 'website' && isHomepage && (
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+)}

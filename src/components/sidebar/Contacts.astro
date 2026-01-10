@@ -1,0 +1,60 @@
+---
+import Icon from '../Icon.astro';
+import { getContactHref } from '@/utils/contacts';
+
+interface Props {
+  contacts: Record<string, string>;
+}
+
+const { contacts } = Astro.props;
+const activeContacts = Object.entries(contacts).filter(([_, value]) => value);
+---
+
+<div class="contacts">
+  <ul class="contacts__list">
+    {activeContacts.map(([name, value]) => (
+      <li class="contacts__item">
+        <a
+          href={getContactHref(name, value)}
+          rel="noopener noreferrer"
+          target="_blank"
+          class="contacts__link"
+          aria-label={name}
+        >
+          <Icon name={name} />
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+
+  .contacts {
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    &__link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      border: 1px solid $color-gray-border;
+      border-radius: 50%;
+      color: $color-base;
+
+      &:hover {
+        color: $color-primary;
+        border-color: $color-primary;
+      }
+    }
+  }
+</style>

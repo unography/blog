@@ -1,0 +1,97 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostAuthor from './post/PostAuthor.astro';
+import PostMeta from './post/PostMeta.astro';
+import PostTags from './post/PostTags.astro';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<article class="post">
+  <a href="/" class="post__home-button">All Articles</a>
+
+  <div class="post__content">
+    <h1 class="post__title">{post.data.title}</h1>
+    <div class="post__body">
+      <Content />
+    </div>
+  </div>
+
+  <footer class="post__footer">
+    <PostMeta date={post.data.date} />
+    {post.data.tags.length > 0 && (
+      <PostTags tags={post.data.tags} />
+    )}
+    <PostAuthor />
+  </footer>
+</article>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+  @use '@/styles/mixins' as *;
+
+  .post {
+    &__home-button {
+      display: block;
+      max-width: 90px;
+      height: $button-height;
+      padding: 0 24px;
+      line-height: $button-height;
+      text-align: center;
+      color: $color-base;
+      border: 1px solid $color-gray-border;
+      border-radius: $button-border-radius;
+      font-size: $font-size-base;
+      margin: 26px auto;
+
+      &:hover {
+        color: $color-primary;
+      }
+
+      @include breakpoint-md {
+        position: fixed;
+        top: 30px;
+        left: 30px;
+        margin: 0;
+      }
+    }
+
+    &__content {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    &__title {
+      font-size: $font-size-base * 2.5;
+      @include margin-top(1);
+      @include margin-bottom(1);
+    }
+
+    &__body {
+      font-size: $font-size-base;
+      @include line-height(1);
+
+      :global(img) {
+        margin: 20px auto;
+      }
+
+      :global(pre) {
+        overflow-x: auto;
+        padding: 16px;
+        border-radius: 4px;
+      }
+    }
+
+    &__footer {
+      max-width: 640px;
+      margin: 40px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid $color-gray-border;
+    }
+  }
+</style>

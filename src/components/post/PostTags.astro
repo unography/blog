@@ -1,0 +1,50 @@
+---
+import { slugify } from '@/utils/slugify';
+
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<div class="tags">
+  <ul class="tags__list">
+    {tags.map((tag) => (
+      <li class="tags__item">
+        <a href={`/tag/${slugify(tag)}/`} class="tags__link">
+          {tag}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+
+  .tags {
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+    }
+
+    &__link {
+      display: inline-block;
+      padding: 5px 15px;
+      border: 1px solid $color-gray-border;
+      border-radius: 20px;
+      font-size: $font-size-small;
+      color: $color-base;
+
+      &:hover {
+        color: $color-primary;
+        border-color: $color-primary;
+      }
+    }
+  }
+</style>

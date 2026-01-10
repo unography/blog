@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '@/layouts/MainLayout.astro';
+import Page from '@/components/Page.astro';
+import Feed from '@/components/Feed.astro';
+import Pagination from '@/components/Pagination.astro';
+import { siteConfig } from '@/config';
+import { paginatePosts } from '@/utils/pagination';
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort((a, b) =>
+  b.data.date.getTime() - a.data.date.getTime()
+);
+
+const { posts, prevUrl, nextUrl } = paginatePosts(
+  sortedPosts,
+  1,
+  siteConfig.postsPerPage
+);
+---
+
+<MainLayout title={siteConfig.title} useH1={true}>
+  <Page>
+    <Feed posts={posts} />
+    <Pagination prevUrl={prevUrl} nextUrl={nextUrl} />
+  </Page>
+</MainLayout>

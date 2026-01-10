@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '@/layouts/MainLayout.astro';
+import Page from '@/components/Page.astro';
+import Feed from '@/components/Feed.astro';
+import Pagination from '@/components/Pagination.astro';
+import { siteConfig } from '@/config';
+import { paginatePosts } from '@/utils/pagination';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+  const totalPages = Math.ceil(allPosts.length / siteConfig.postsPerPage);
+
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
+    params: { page: String(i + 2) }
+  }));
+}
+
+const { page } = Astro.params;
+const pageNum = parseInt(page!, 10);
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort((a, b) =>
+  b.data.date.getTime() - a.data.date.getTime()
+);
+
+const { posts, prevUrl, nextUrl } = paginatePosts(
+  sortedPosts,
+  pageNum,
+  siteConfig.postsPerPage
+);
+
+const title = `Posts - Page ${pageNum} - ${siteConfig.title}`;
+---
+
+<MainLayout title={title}>
+  <Page>
+    <Feed posts={posts} />
+    <Pagination prevUrl={prevUrl} nextUrl={nextUrl} />
+  </Page>
+</MainLayout>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, description, socialImage, date, tags } = post.data;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  socialImage={socialImage}
+  type="article"
+  publishedTime={date}
+  tags={tags}
+>
+  <div class="post-layout">
+    <slot />
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  @use '@/styles/variables' as *;
+  @use '@/styles/mixins' as *;
+
+  .post-layout {
+    max-width: $layout-post-single-width;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    @include breakpoint-md {
+      padding: 0;
+    }
+  }
+</style>
