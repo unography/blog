@@ -4,7 +4,16 @@ interface Props {
 }
 
 const { menu } = Astro.props;
-const currentPath = Astro.url.pathname;
+// Normalize path by removing trailing slash for comparison
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function isActive(itemPath: string): boolean {
+  const normalizedItemPath = itemPath.replace(/\/$/, '') || '/';
+  if (normalizedItemPath === '/') {
+    return currentPath === '/' || currentPath.startsWith('/page/');
+  }
+  return currentPath === normalizedItemPath || currentPath.startsWith(normalizedItemPath + '/');
+}
 ---
 
 <nav class="menu">
@@ -13,7 +22,7 @@ const currentPath = Astro.url.pathname;
       <li class="menu__item">
         <a
           href={item.path}
-          class:list={['menu__link', { 'menu__link--active': currentPath === item.path || (item.path === '/' && currentPath.startsWith('/page/')) }]}
+          class:list={['menu__link', { 'menu__link--active': isActive(item.path) }]}
         >
           {item.label}
         </a>
