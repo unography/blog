@@ -39,10 +39,11 @@ const currentPath = Astro.url.pathname;
     &__link {
       color: $color-base;
       font-weight: 500;
+      border-bottom: 1px solid transparent;
 
       &:hover, &--active {
         color: $color-primary;
-        border-bottom: 1px solid $color-primary;
+        border-bottom-color: $color-primary;
       }
     }
   }
