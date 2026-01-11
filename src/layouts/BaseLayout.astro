@@ -39,6 +39,15 @@ const isHomepage = Astro.url.pathname === '/';
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/photo.jpg" as="image" />
+
+    <!-- DNS prefetch for any external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+
+    <!-- Preconnect hints for faster external resource loading -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <!-- Open Graph -->
     <meta property="og:site_name" content={siteConfig.title} />
     <meta property="og:title" content={title} />

@@ -1,0 +1,58 @@
+---
+interface Props {
+  src: string;  // Path without extension, e.g., "/media/intro_to_convolutions/conv"
+  alt: string;
+  class?: string;
+  width?: number;
+  height?: number;
+}
+
+const { src, alt, class: className, width, height } = Astro.props;
+
+// Generate paths for different formats
+const webmSrc = `${src}.webm`;
+const mp4Src = `${src}.mp4`;
+const gifFallback = `${src}.gif`;
+---
+
+<figure class:list={["video-container", className]}>
+  <video
+    autoplay
+    loop
+    muted
+    playsinline
+    width={width}
+    height={height}
+    aria-label={alt}
+  >
+    <!-- WebM first for browsers that support it (better compression) -->
+    <source src={webmSrc} type="video/webm" />
+    <!-- MP4 fallback for Safari and older browsers -->
+    <source src={mp4Src} type="video/mp4" />
+    <!-- GIF fallback for browsers that don't support video -->
+    <img src={gifFallback} alt={alt} loading="lazy" />
+  </video>
+  {alt && <figcaption class="video-caption">{alt}</figcaption>}
+</figure>
+
+<style>
+  .video-container {
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+  }
+
+  .video-caption {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #666;
+    font-style: italic;
+  }
+</style>

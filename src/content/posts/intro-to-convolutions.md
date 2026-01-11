@@ -42,9 +42,13 @@ In the case of Game of Thrones, channels can be thought of as a department - the
 
 We now come to ***convolutions***.
 
-![](/media/intro_to_convolutions/2dconv-84a92b2e7cce6f31ad9fba1e57841198.gif "fig. 1: an example of 2D convolution of a 3x3x1 kernel on 5x5x1 data")
-
-*fig. 1: an example of 2D convolution of a 3x3x1 kernel on 5x5x1 data*\
+<figure>
+<video autoplay loop muted playsinline>
+  <source src="/media/intro_to_convolutions/2dconv-84a92b2e7cce6f31ad9fba1e57841198.webm" type="video/webm" />
+  <source src="/media/intro_to_convolutions/2dconv-84a92b2e7cce6f31ad9fba1e57841198.mp4" type="video/mp4" />
+</video>
+<figcaption>fig. 1: an example of 2D convolution of a 3x3x1 kernel on 5x5x1 data</figcaption>
+</figure>
 \
 In convolution, we take a kernel of dimension (width, height, channel) e.g. 3x3x1 and slide it across our data, performing elementwise multiplication over the part of the input it is currently on, and summing up the results to get the output element.
 
@@ -52,9 +56,13 @@ In the image above, a 3x3x1 kernel is convolving over 5x5x1 input data. This is 
 
 *Note: The number of channels a kernel has needs to be the same as the number of channels in the input data. Now based on the number of kernels we use, the output data's channels get decided. e.g. if our input data is of size 7x71, our kernel must have 1 channel, like 3x3x1. Now if we use 32 such kernels, the output data's size will be something like 5x5x32 (it will have 32 channels) If we further want to convolve, we must use kernels with 32 channels, e.g. 3x3x32.*
 
-![](/media/intro_to_convolutions/conv-84deaf2954585b37a73fbcf84bc3cf6e.gif "fig. 2: convolution of 4 kernels of shape 3x3x3 on data of size 5x5x3 to get output of shape 3x3x4")
-
-*fig. 2: convolution of 4 kernels of shape 3x3x3 on data of size 5x5x3 to get an output of shape 3x3x4*
+<figure>
+<video autoplay loop muted playsinline>
+  <source src="/media/intro_to_convolutions/conv-84deaf2954585b37a73fbcf84bc3cf6e.webm" type="video/webm" />
+  <source src="/media/intro_to_convolutions/conv-84deaf2954585b37a73fbcf84bc3cf6e.mp4" type="video/mp4" />
+</video>
+<figcaption>fig. 2: convolution of 4 kernels of shape 3x3x3 on data of size 5x5x3 to get an output of shape 3x3x4</figcaption>
+</figure>
 
 ## On not using even shaped kernels - 2x2,4x4,6x6
 

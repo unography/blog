@@ -59,6 +59,27 @@ img {
   max-width: 100%;
   display: block;
   margin: auto;
+  height: auto;
+}
+
+// Video elements (converted GIFs)
+video {
+  max-width: 100%;
+  display: block;
+  margin: auto;
+  height: auto;
+}
+
+figure {
+  margin: 1.5rem 0;
+  text-align: center;
+
+  figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #666;
+    font-style: italic;
+  }
 }
 
 p {

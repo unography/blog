@@ -59,7 +59,13 @@ The points in both the cases are random, yet in the second image they have a vis
 
 In p5.js, simply calling `noise()` instead of `random()` gives this type of pattern, which is what we used to get the semi-random destination points
 
-![generative gif](/media/recreating_paintings/vangoghgenerative-1f14226fa7fbce3ab1236133995b81bf.gif "generative gif")
+<figure>
+<video autoplay loop muted playsinline>
+  <source src="/media/recreating_paintings/vangoghgenerative-1f14226fa7fbce3ab1236133995b81bf.webm" type="video/webm" />
+  <source src="/media/recreating_paintings/vangoghgenerative-1f14226fa7fbce3ab1236133995b81bf.mp4" type="video/mp4" />
+</video>
+<figcaption>Generative art creating Van Gogh portrait</figcaption>
+</figure>
 
 In case you're bored with just seeing Van Gogh - the code is deployed live here, where each time you refresh the page, you get a new, random painting!
 
