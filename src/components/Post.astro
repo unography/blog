@@ -13,7 +13,7 @@ const { Content } = await post.render();
 ---
 
 <article class="post">
-  <a href="/" class="post__home-button">All Articles</a>
+  <a href="/" class="post__home-button">← Home</a>
 
   <div class="post__content">
     <h1 class="post__title">{post.data.title}</h1>
@@ -90,7 +90,7 @@ const { Content } = await post.render();
     &__footer {
       max-width: 640px;
       margin: 40px auto 0;
-      padding-top: 20px;
+      padding: 20px 0 60px;
       border-top: 1px solid $color-gray-border;
     }
   }
